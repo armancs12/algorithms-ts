@@ -1,0 +1,13 @@
+{
+  "name": "data-structures",
+  "version": "1.0.0",
+  "description": "Data structures",
+  "main": "dist/index.js",
+  "author": "Serhat S. <serhats@tutamail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  }
+}
