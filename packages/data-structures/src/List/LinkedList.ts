@@ -1,6 +1,6 @@
 import IList from './IList';
 
-class Node<T extends Object> {
+class Node<T> {
   data: T;
   next: Node<T>;
 
@@ -10,8 +10,8 @@ class Node<T extends Object> {
   }
 }
 
-export default class LinkedList<T extends Object> implements IList<T> {
-  length: number = 0;
+export default class LinkedList<T> implements IList<T> {
+  length = 0;
 
   private head: Node<T> = null;
 
@@ -27,7 +27,7 @@ export default class LinkedList<T extends Object> implements IList<T> {
   }
 
   pushFront(data: T): void {
-    let newHead = new Node(data);
+    const newHead = new Node(data);
     newHead.next = this.head;
     this.head = newHead;
     this.length++;
@@ -36,7 +36,7 @@ export default class LinkedList<T extends Object> implements IList<T> {
   pop(): T {
     if (this.length == 0) throw new Error('There is no element to pop');
     if (this.length == 1) {
-      let data = this.head.data;
+      const data = this.head.data;
       this.head = null;
       this.length = 0;
       return data;
@@ -48,7 +48,7 @@ export default class LinkedList<T extends Object> implements IList<T> {
       prev = iter;
       iter = iter.next;
     }
-    let data = iter.data;
+    const data = iter.data;
     prev.next = null;
     this.length--;
     return data;
@@ -57,7 +57,7 @@ export default class LinkedList<T extends Object> implements IList<T> {
   popFront(): T {
     if (this.length == 0) throw new Error('There is no element to pop');
 
-    let data = this.head.data;
+    const data = this.head.data;
     this.head = this.head.next;
     this.length--;
     return data;
@@ -82,7 +82,7 @@ export default class LinkedList<T extends Object> implements IList<T> {
       prev = iter;
       iter = iter.next;
     }
-    let data = iter.data;
+    const data = iter.data;
     prev.next = iter.next;
     this.length--;
     return data;
