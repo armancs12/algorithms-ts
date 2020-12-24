@@ -1,6 +1,6 @@
 import { ArrayList } from '../../src';
 
-describe('LinkedList', () => {
+describe('ArrayList', () => {
   describe('length', () => {
     it('should initialize with 0', () => {
       const arrayList = new ArrayList();
@@ -41,6 +41,14 @@ describe('LinkedList', () => {
       arrayList.removeAt(0);
 
       expect(arrayList.length).toEqual(0);
+    });
+
+    it('should increment by 1 when insertAt method called', () => {
+      const arrayList = new ArrayList();
+      arrayList.push(0);
+      arrayList.insertAt(0, 24);
+
+      expect(arrayList.length).toEqual(2);
     });
   });
 
@@ -144,6 +152,33 @@ describe('LinkedList', () => {
     });
   });
 
+  describe('set', () => {
+    it('should throw error when called right after initialization', () => {
+      const arrayList = new ArrayList();
+
+      expect(() => {
+        arrayList.set(0, 12);
+      }).toThrowError('Index out of list range!');
+    });
+
+    it('should set data in the index', () => {
+      const arrayList = new ArrayList();
+      arrayList.push(12);
+      arrayList.set(0, 24);
+
+      const returned = arrayList.get(0);
+      expect(returned).toEqual(24);
+    });
+
+    it('should throw error when index is out of list range', () => {
+      const arrayList = new ArrayList();
+
+      expect(() => {
+        arrayList.set(1, 12);
+      }).toThrowError('Index out of list range!');
+    });
+  });
+
   describe('removeAt', () => {
     it('should throw error when called right after initialization', () => {
       const arrayList = new ArrayList();
@@ -176,6 +211,37 @@ describe('LinkedList', () => {
 
       expect(() => {
         arrayList.removeAt(1);
+      }).toThrowError('Index out of list range!');
+    });
+  });
+
+  describe('insertAt', () => {
+    it('should throw error when called right after initialization', () => {
+      const arrayList = new ArrayList();
+
+      expect(() => {
+        arrayList.insertAt(0, 12);
+      }).toThrowError('Index out of list range!');
+    });
+
+    it('should insert in the index', () => {
+      const arrayList = new ArrayList();
+      arrayList.push(12);
+      arrayList.push(24);
+      arrayList.push(36);
+
+      arrayList.insertAt(1, 48);
+
+      expect(arrayList.toString()).toEqual('[ 12 48 24 36 ]');
+    });
+
+    it('should throw error when index is out of list range', () => {
+      const arrayList = new ArrayList();
+      arrayList.push(12);
+      arrayList.push(24);
+
+      expect(() => {
+        arrayList.insertAt(3, 36);
       }).toThrowError('Index out of list range!');
     });
   });

@@ -62,6 +62,13 @@ export default class ArrayList<T> implements IList<T> {
     return this.array[index];
   }
 
+  set(index: number, data: T): void {
+    if (index < 0 || index >= this.length)
+      throw new Error('Index out of list range!');
+
+    this.array[index] = data;
+  }
+
   removeAt(index: number): T {
     if (index < 0 || index >= this.length)
       throw new Error('Index out of list range!');
@@ -69,6 +76,14 @@ export default class ArrayList<T> implements IList<T> {
     for (let i = index; i < this.length; i++) this.array[i] = this.array[i + 1];
     this.array[--this.length] = undefined;
     return data;
+  }
+
+  insertAt(index: number, data: T): void {
+    if (index < 0 || index >= this.length)
+      throw new Error('Index out of list range!');
+    for (let i = this.length; i > index; i--) this.array[i] = this.array[i - 1];
+    this.array[index] = data;
+    this.length++;
   }
 
   toString(): string {

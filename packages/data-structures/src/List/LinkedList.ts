@@ -72,6 +72,14 @@ export default class LinkedList<T> implements IList<T> {
     return iter.data;
   }
 
+  set(index: number, data: T): void {
+    if (index < 0 || index >= this.length)
+      throw new Error('Index out of list range!');
+    let iter = this.head;
+    for (let i = 0; i < index; i++) iter = iter.next;
+    iter.data = data;
+  }
+
   removeAt(index: number): T {
     if (index < 0 || index >= this.length)
       throw new Error('Index out of list range!');
@@ -86,6 +94,20 @@ export default class LinkedList<T> implements IList<T> {
     prev.next = iter.next;
     this.length--;
     return data;
+  }
+
+  insertAt(index: number, data: T): void {
+    if (index < 0 || index >= this.length)
+      throw new Error('Index out of list range!');
+
+    let prev: Node<T> = this.head;
+    let iter = this.head;
+    for (let i = 0; i < index; i++) {
+      prev = iter;
+      iter = iter.next;
+    }
+    prev.next = new Node(data, iter);
+    this.length++;
   }
 
   toString(): string {

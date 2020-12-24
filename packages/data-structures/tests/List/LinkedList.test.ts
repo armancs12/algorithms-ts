@@ -42,6 +42,14 @@ describe('LinkedList', () => {
 
       expect(linkedList.length).toEqual(0);
     });
+
+    it('should increment by 1 when insertAt method called', () => {
+      const linkedList = new LinkedList();
+      linkedList.push(0);
+      linkedList.insertAt(0, 24);
+
+      expect(linkedList.length).toEqual(2);
+    });
   });
 
   //describe('push', () => {});
@@ -144,6 +152,33 @@ describe('LinkedList', () => {
     });
   });
 
+  describe('set', () => {
+    it('should throw error when called right after initialization', () => {
+      const linkedList = new LinkedList();
+
+      expect(() => {
+        linkedList.set(0, 12);
+      }).toThrowError('Index out of list range!');
+    });
+
+    it('should set data in the index', () => {
+      const linkedList = new LinkedList();
+      linkedList.push(12);
+      linkedList.set(0, 24);
+
+      const returned = linkedList.get(0);
+      expect(returned).toEqual(24);
+    });
+
+    it('should throw error when index is out of list range', () => {
+      const linkedList = new LinkedList();
+
+      expect(() => {
+        linkedList.set(1, 12);
+      }).toThrowError('Index out of list range!');
+    });
+  });
+
   describe('removeAt', () => {
     it('should throw error when called right after initialization', () => {
       const linkedList = new LinkedList();
@@ -176,6 +211,37 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.removeAt(1);
+      }).toThrowError('Index out of list range!');
+    });
+  });
+
+  describe('insertAt', () => {
+    it('should throw error when called right after initialization', () => {
+      const linkedList = new LinkedList();
+
+      expect(() => {
+        linkedList.insertAt(0, 12);
+      }).toThrowError('Index out of list range!');
+    });
+
+    it('should insert in the index', () => {
+      const linkedList = new LinkedList();
+      linkedList.push(12);
+      linkedList.push(24);
+      linkedList.push(36);
+
+      linkedList.insertAt(1, 48);
+
+      expect(linkedList.toString()).toEqual('[ 12 48 24 36 ]');
+    });
+
+    it('should throw error when index is out of list range', () => {
+      const linkedList = new LinkedList();
+      linkedList.push(12);
+      linkedList.push(24);
+
+      expect(() => {
+        linkedList.insertAt(3, 36);
       }).toThrowError('Index out of list range!');
     });
   });
