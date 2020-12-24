@@ -1,5 +1,6 @@
 import IStack from './IStack';
 import Array from '../common/DynamicArray';
+import { NoItemError } from '../exceptions';
 
 export default class ArrayStack<T> implements IStack<T> {
   length: number;
@@ -17,7 +18,7 @@ export default class ArrayStack<T> implements IStack<T> {
   }
 
   pop(): T {
-    if (this.length == 0) throw new Error('No item to pop!');
+    if (this.length == 0) throw new NoItemError();
     const data = this.array.get(this.length - 1);
     this.array.set(--this.length, undefined);
     if (this.array.length > 1 && this.length < this.array.length / 2)
@@ -26,7 +27,7 @@ export default class ArrayStack<T> implements IStack<T> {
   }
 
   peek(): T {
-    if (this.length == 0) throw new Error('No item to peek!');
+    if (this.length == 0) throw new NoItemError();
     return this.array.get(this.length - 1);
   }
 

@@ -1,5 +1,6 @@
 import IList from './IList';
 import Node from '../common/Node';
+import { IndexOutOfRangeError, NoItemError } from '../exceptions';
 export default class LinkedList<T> implements IList<T> {
   length = 0;
 
@@ -24,7 +25,7 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   pop(): T {
-    if (this.length == 0) throw new Error('There is no element to pop');
+    if (this.length == 0) throw new NoItemError();
     if (this.length == 1) {
       const data = this.head.data;
       this.head = null;
@@ -45,7 +46,7 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   popFront(): T {
-    if (this.length == 0) throw new Error('There is no element to pop');
+    if (this.length == 0) throw new NoItemError();
 
     const data = this.head.data;
     this.head = this.head.next;
@@ -54,8 +55,7 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   get(index: number): T {
-    if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
 
     let iter = this.head;
     for (let i = 0; i < index; i++) iter = iter.next;
@@ -63,16 +63,14 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   set(index: number, data: T): void {
-    if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
     let iter = this.head;
     for (let i = 0; i < index; i++) iter = iter.next;
     iter.data = data;
   }
 
   removeAt(index: number): T {
-    if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
 
     let prev: Node<T> = this.head;
     let iter = this.head;
@@ -87,8 +85,7 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   insertAt(index: number, data: T): void {
-    if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
 
     let prev: Node<T> = this.head;
     let iter = this.head;

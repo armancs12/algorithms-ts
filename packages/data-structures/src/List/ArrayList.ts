@@ -1,5 +1,6 @@
 import IList from './IList';
 import Array from '../common/DynamicArray';
+import { IndexOutOfRangeError, NoItemError } from '../exceptions';
 export default class ArrayList<T> implements IList<T> {
   length: number;
   private array: Array<T>;
@@ -27,7 +28,7 @@ export default class ArrayList<T> implements IList<T> {
   }
 
   pop(): T {
-    if (this.length == 0) throw new Error('There is no element to pop');
+    if (this.length == 0) throw new NoItemError();
     const data = this.array.get(this.length - 1);
     this.array.set(--this.length, undefined);
     if (this.array.length > 1 && this.length < this.array.length / 2)
@@ -36,7 +37,7 @@ export default class ArrayList<T> implements IList<T> {
   }
 
   popFront(): T {
-    if (this.length == 0) throw new Error('There is no element to pop');
+    if (this.length == 0) throw new NoItemError();
     const data = this.array.get(0);
 
     for (let i = 0; i < this.length; i++)
@@ -50,20 +51,20 @@ export default class ArrayList<T> implements IList<T> {
 
   get(index: number): T {
     if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+      throw new IndexOutOfRangeError();
     return this.array.get(index);
   }
 
   set(index: number, data: T): void {
     if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+      throw new IndexOutOfRangeError();
 
     this.array.set(index, data);
   }
 
   removeAt(index: number): T {
     if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+      throw new IndexOutOfRangeError();
 
     const data = this.array.get(index);
     for (let i = index; i < this.length; i++)
@@ -75,7 +76,7 @@ export default class ArrayList<T> implements IList<T> {
 
   insertAt(index: number, data: T): void {
     if (index < 0 || index >= this.length)
-      throw new Error('Index out of list range!');
+      throw new IndexOutOfRangeError();
 
     for (let i = this.length; i > index; i--)
       this.array.set(i, this.array.get(i - 1));

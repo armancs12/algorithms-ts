@@ -1,4 +1,5 @@
 import { LinkedList } from '../../src';
+import { IndexOutOfRangeError, NoItemError } from '../../src/exceptions';
 
 describe('LinkedList', () => {
   describe('length', () => {
@@ -62,7 +63,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.pop();
-      }).toThrowError('There is no element to pop');
+      }).toThrowError(NoItemError);
     });
 
     it('should return last pushed item', () => {
@@ -82,7 +83,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.pop();
-      }).toThrowError('There is no element to pop');
+      }).toThrowError(NoItemError);
     });
   });
 
@@ -92,7 +93,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.popFront();
-      }).toThrowError('There is no element to pop');
+      }).toThrowError(NoItemError);
     });
 
     it('should return first pushed item', () => {
@@ -112,7 +113,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.popFront();
-      }).toThrowError('There is no element to pop');
+      }).toThrowError(NoItemError);
     });
   });
 
@@ -122,7 +123,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.get(0);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
 
     it('should return data in the index (1)', () => {
@@ -148,7 +149,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.get(1);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
   });
 
@@ -158,7 +159,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.set(0, 12);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
 
     it('should set data in the index', () => {
@@ -175,7 +176,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.set(1, 12);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
   });
 
@@ -185,7 +186,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.removeAt(0);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
 
     it('should return data in the index (1)', () => {
@@ -211,7 +212,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.removeAt(1);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
   });
 
@@ -221,7 +222,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.insertAt(0, 12);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
 
     it('should insert in the index', () => {
@@ -242,7 +243,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.insertAt(3, 36);
-      }).toThrowError('Index out of list range!');
+      }).toThrowError(IndexOutOfRangeError);
     });
   });
 

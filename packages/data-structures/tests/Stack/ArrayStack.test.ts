@@ -1,4 +1,5 @@
 import { ArrayStack } from '../../src';
+import { NoItemError } from '../../src/exceptions';
 
 describe('ArrayStack', () => {
   describe('length', () => {
@@ -42,7 +43,7 @@ describe('ArrayStack', () => {
 
       expect(() => {
         arrayStack.pop();
-      }).toThrowError('No item to pop');
+      }).toThrowError(NoItemError);
     });
 
     it('should remove from stack', () => {
@@ -75,7 +76,7 @@ describe('ArrayStack', () => {
 
       expect(() => {
         arrayStack.pop();
-      }).toThrowError('No item to pop');
+      }).toThrowError(NoItemError);
     });
   });
 
@@ -85,7 +86,7 @@ describe('ArrayStack', () => {
 
       expect(() => {
         arrayStack.peek();
-      }).toThrowError('No item to peek');
+      }).toThrowError(NoItemError);
     });
 
     it('should return last pushed item', () => {
@@ -108,7 +109,7 @@ describe('ArrayStack', () => {
 
       expect(() => {
         arrayStack.peek();
-      }).toThrowError('No item to peek');
+      }).toThrowError(NoItemError);
     });
   });
 
