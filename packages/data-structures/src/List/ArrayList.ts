@@ -1,94 +1,92 @@
 import IList from './IList';
-
+import Array from '../common/DynamicArray';
 export default class ArrayList<T> implements IList<T> {
   length: number;
   private array: Array<T>;
-  private arrayLength: number;
 
   constructor() {
     this.length = 0;
     this.array = new Array<T>(1);
-    this.arrayLength = 1;
-  }
-
-  private increaseArray() {
-    this.arrayLength = this.arrayLength * 2;
-    const newArray = new Array(this.arrayLength);
-    for (let i = 0; i < this.length; i++) newArray[i] = this.array[i];
-    this.array = newArray;
-  }
-
-  private decreaseArray() {
-    this.arrayLength = this.arrayLength / 2;
-    const newArray = new Array(this.arrayLength);
-    for (let i = 0; i < this.length; i++) newArray[i] = this.array[i];
-    this.array = newArray;
   }
 
   push(data: T): void {
-    if (this.length == this.arrayLength) this.increaseArray();
-    this.array[this.length++] = data;
+    if (this.length == this.array.length)
+      this.array.changeSize(this.array.length * 2);
+    this.array.set(this.length++, data);
   }
 
   pushFront(data: T): void {
-    if (this.length == this.arrayLength) this.increaseArray();
-    for (let i = this.length; i > 0; i--) this.array[i] = this.array[i - 1];
-    this.array[0] = data;
+    if (this.length == this.array.length)
+      this.array.changeSize(this.array.length * 2);
+
+    for (let i = this.length; i > 0; i--)
+      this.array.set(i, this.array.get(i - 1));
+
+    this.array.set(0, data);
     this.length++;
   }
 
   pop(): T {
     if (this.length == 0) throw new Error('There is no element to pop');
-    const data = this.array[this.length - 1];
-    this.array[--this.length] = undefined;
-    if (this.arrayLength > 1 && this.length < this.arrayLength / 2)
-      this.decreaseArray();
+    const data = this.array.get(this.length - 1);
+    this.array.set(--this.length, undefined);
+    if (this.array.length > 1 && this.length < this.array.length / 2)
+      this.array.changeSize(this.array.length / 2);
     return data;
   }
 
   popFront(): T {
     if (this.length == 0) throw new Error('There is no element to pop');
-    const data = this.array[0];
-    for (let i = 0; i < this.length; i++) this.array[i] = this.array[i + 1];
-    this.array[--this.length] = undefined;
-    if (this.arrayLength > 1 && this.length < this.arrayLength / 2)
-      this.decreaseArray();
+    const data = this.array.get(0);
+
+    for (let i = 0; i < this.length; i++)
+      this.array.set(i, this.array.get(i + 1));
+
+    this.array.set(--this.length, undefined);
+    if (this.array.length > 1 && this.length < this.array.length / 2)
+      this.array.changeSize(this.array.length / 2);
     return data;
   }
 
   get(index: number): T {
     if (index < 0 || index >= this.length)
       throw new Error('Index out of list range!');
-    return this.array[index];
+    return this.array.get(index);
   }
 
   set(index: number, data: T): void {
     if (index < 0 || index >= this.length)
       throw new Error('Index out of list range!');
 
-    this.array[index] = data;
+    this.array.set(index, data);
   }
 
   removeAt(index: number): T {
     if (index < 0 || index >= this.length)
       throw new Error('Index out of list range!');
-    const data = this.array[index];
-    for (let i = index; i < this.length; i++) this.array[i] = this.array[i + 1];
-    this.array[--this.length] = undefined;
+
+    const data = this.array.get(index);
+    for (let i = index; i < this.length; i++)
+      this.array.set(i, this.array.get(i + 1));
+
+    this.array.set(--this.length, undefined);
     return data;
   }
 
   insertAt(index: number, data: T): void {
     if (index < 0 || index >= this.length)
       throw new Error('Index out of list range!');
-    for (let i = this.length; i > index; i--) this.array[i] = this.array[i - 1];
-    this.array[index] = data;
+
+    for (let i = this.length; i > index; i--)
+      this.array.set(i, this.array.get(i - 1));
+
+    this.array.set(index, data);
     this.length++;
   }
 
   toString(): string {
     let print = '[ ';
-    for (const data of this.array)
+    for (const data of this.array.array)
       if (data != undefined) print += `${data.toString()} `;
     return print + ']';
   }

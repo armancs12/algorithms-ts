@@ -1,13 +1,5 @@
 import IStack from './IStack';
-
-class Node<T> {
-  data: T;
-  next: Node<T>;
-  constructor(data: T, next: Node<T> = null) {
-    this.data = data;
-    this.next = next;
-  }
-}
+import Node from '../common/Node';
 
 export default class LinkedStack<T> implements IStack<T> {
   length: number;
