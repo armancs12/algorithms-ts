@@ -3,58 +3,45 @@ import Node from '../common/Node';
 import { NoItemError } from '../exceptions';
 
 export default class LinkedStack<T> implements IStack<T> {
-  length: number;
+  private len: number;
   private head: Node<T>;
 
   constructor() {
-    this.length = 0;
+    this.len = 0;
+  }
+
+  get length(): number {
+    return this.len;
   }
 
   push(data: T): void {
     if (this.length == 0) this.head = new Node(data);
-    else {
-      let iter = this.head;
-      while (iter.next != null) iter = iter.next;
-      iter.next = new Node(data);
-    }
-    this.length++;
+    else this.head.getLast().next = new Node(data);
+    this.len++;
   }
 
   pop(): T {
-    if (this.length == 0) throw new NoItemError();
-    if (this.length == 1) {
+    if (this.len == 0) throw new NoItemError();
+    if (this.len == 1) {
       const data = this.head.data;
       this.head = null;
-      this.length = 0;
-      return data;
-    } else {
-      let iter = this.head;
-      let prev = iter;
-      while (iter.next != null) {
-        prev = iter;
-        iter = iter.next;
-      }
-      const data = prev.next.data;
-      prev.next = null;
-      this.length--;
+      this.len = 0;
       return data;
     }
+    const last = this.head.getLastBefore();
+    const data = last.next.data;
+    last.next = null;
+    this.len--;
+    return data;
   }
 
   peek(): T {
-    if (this.length == 0) throw new NoItemError();
-    let iter = this.head;
-    while (iter.next != null) iter = iter.next;
-    return iter.data;
+    if (this.len == 0) throw new NoItemError();
+    return this.head.getLast().data;
   }
 
   toString(): string {
-    let print = '[ ';
-    let iter = this.head;
-    while (iter != null) {
-      print += `${iter.data} `;
-      iter = iter.next;
-    }
-    return print + ']';
+    if (this.head == null) return '[ ]';
+    return this.head.toString();
   }
 }

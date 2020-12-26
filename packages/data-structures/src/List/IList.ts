@@ -1,5 +1,5 @@
 export default interface IList<T> {
-  length: number;
+  readonly length: number;
 
   push(data: T): void;
   pushFront(data: T): void;

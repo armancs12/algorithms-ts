@@ -1,5 +1,5 @@
 export default interface IQueue<T> {
-  length: number;
+  readonly length: number;
 
   enqueue(data: T): void;
   dequeue(): T;

@@ -1,5 +1,6 @@
 export default interface IStack<T> {
-  length: number;
+  readonly length: number;
+
   push(data: T): void;
   pop(): T;
   peek(): T;

@@ -2,60 +2,56 @@ import IList from './IList';
 import Node from '../common/Node';
 import { IndexOutOfRangeError, NoItemError } from '../exceptions';
 export default class LinkedList<T> implements IList<T> {
-  length = 0;
+  private head: Node<T>;
+  private len: number;
 
-  private head: Node<T> = null;
+  constructor() {
+    this.len = 0;
+  }
+
+  get length(): number {
+    return this.len;
+  }
 
   push(data: T): void {
-    if (this.length == 0) {
-      this.head = new Node(data);
-    } else {
-      let iter = this.head;
-      while (iter.next != null) iter = iter.next;
-      iter.next = new Node(data);
-    }
-    this.length++;
+    if (this.len == 0) this.head = new Node(data);
+    else this.head.getLast().next = new Node(data);
+    this.len++;
   }
 
   pushFront(data: T): void {
     const newHead = new Node(data);
     newHead.next = this.head;
     this.head = newHead;
-    this.length++;
+    this.len++;
   }
 
   pop(): T {
-    if (this.length == 0) throw new NoItemError();
-    if (this.length == 1) {
+    if (this.len == 0) throw new NoItemError();
+    if (this.len == 1) {
       const data = this.head.data;
       this.head = null;
-      this.length = 0;
+      this.len = 0;
       return data;
     }
-
-    let prev: Node<T>;
-    let iter = this.head;
-    while (iter.next != null) {
-      prev = iter;
-      iter = iter.next;
-    }
-    const data = iter.data;
-    prev.next = null;
-    this.length--;
+    const last = this.head.getLastBefore();
+    const data = last.next.data;
+    last.next.data = null;
+    this.len--;
     return data;
   }
 
   popFront(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.len == 0) throw new NoItemError();
 
     const data = this.head.data;
     this.head = this.head.next;
-    this.length--;
+    this.len--;
     return data;
   }
 
   get(index: number): T {
-    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
+    if (index < 0 || index >= this.len) throw new IndexOutOfRangeError();
 
     let iter = this.head;
     for (let i = 0; i < index; i++) iter = iter.next;
@@ -63,14 +59,14 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   set(index: number, data: T): void {
-    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
+    if (index < 0 || index >= this.len) throw new IndexOutOfRangeError();
     let iter = this.head;
     for (let i = 0; i < index; i++) iter = iter.next;
     iter.data = data;
   }
 
   removeAt(index: number): T {
-    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
+    if (index < 0 || index >= this.len) throw new IndexOutOfRangeError();
 
     let prev: Node<T> = this.head;
     let iter = this.head;
@@ -80,12 +76,12 @@ export default class LinkedList<T> implements IList<T> {
     }
     const data = iter.data;
     prev.next = iter.next;
-    this.length--;
+    this.len--;
     return data;
   }
 
   insertAt(index: number, data: T): void {
-    if (index < 0 || index >= this.length) throw new IndexOutOfRangeError();
+    if (index < 0 || index >= this.len) throw new IndexOutOfRangeError();
 
     let prev: Node<T> = this.head;
     let iter = this.head;
@@ -94,17 +90,11 @@ export default class LinkedList<T> implements IList<T> {
       iter = iter.next;
     }
     prev.next = new Node(data, iter);
-    this.length++;
+    this.len++;
   }
 
   toString(): string {
-    let print = '[ ';
-    let iter = this.head;
-    while (iter != null) {
-      print += `${iter.data.toString()} `;
-      iter = iter.next;
-    }
-    print += ']';
-    return print;
+    if (this.head == null) return '[ ]';
+    return this.head.toString();
   }
 }
