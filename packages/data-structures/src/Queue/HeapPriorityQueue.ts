@@ -1,27 +1,54 @@
+import BinaryHeap from '../common/BinaryHeap';
+import { NoItemError } from '../exceptions';
 import IQueue from './IQueue';
 
 export default class HeapPriorityQueue<T> implements IQueue<T> {
-  get length(): number {
-    throw new Error('Method not implemented.');
+  heap: BinaryHeap<T>;
+
+  constructor(compareFunction?: (first: T, second: T) => 1 | 0 | -1) {
+    this.heap = new BinaryHeap(compareFunction);
   }
 
-  enqueue(_data: T): void {
-    throw new Error('Method not implemented.');
+  get length(): number {
+    return this.heap.length;
+  }
+
+  enqueue(data: T): void {
+    this.heap.push(data);
   }
 
   dequeue(): T {
-    throw new Error('Method not implemented.');
+    return this.heap.pop();
   }
 
   front(): T {
-    throw new Error('Method not implemented.');
+    return this.heap.peek();
   }
 
   rear(): T {
-    throw new Error('Method not implemented.');
+    //TODO: find a better solution
+    if (this.length == 0) throw new NoItemError();
+    const newHeap = new BinaryHeap<T>();
+    let data: T;
+    while (this.length != 0) {
+      data = this.heap.pop();
+      newHeap.push(data);
+    }
+    this.heap = newHeap;
+    return data;
   }
 
   toString(): string {
-    throw new Error('Method not implemented.');
+    //TODO: find a better solution
+    const newHeap = new BinaryHeap<T>();
+    let data: T;
+    let print = '[ ';
+    while (this.length != 0) {
+      data = this.heap.pop();
+      print += `${data} `;
+      newHeap.push(data);
+    }
+    this.heap = newHeap;
+    return print + ']';
   }
 }
