@@ -1,0 +1,16 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "Algorithms",
+  "main": "dist/index.js",
+  "author": "Serhat S. <serhats@tutamail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "data-structures": "^1.0.0"
+  }
+}
