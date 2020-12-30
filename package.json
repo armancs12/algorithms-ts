@@ -9,10 +9,13 @@
     "packages/*"
   ],
   "scripts": {
-    "build:all": "lerna run build",
+    "build": "lerna run build",
     "build:dst": "lerna run build --scope=data-structures",
-    "test:all": "lerna run test",
-    "test:dst": "lerna run test --scope=data-structures"
+    "build:alg": "lerna run build --scope=algorithms",
+    "build:watch": "lerna run build:watch",
+    "test": "lerna run test",
+    "test:dst": "lerna run test --scope=data-structures",
+    "test:alg": "lerna run test --scope=algorithms"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",
