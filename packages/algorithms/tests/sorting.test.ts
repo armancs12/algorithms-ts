@@ -1,7 +1,10 @@
 import { ArrayList, IList, LinkedList } from 'data-structures';
 import { bubbleSort, insertionSort, selectionSort, quickSort } from '../src';
 
-type sortFunc = <T>(list: IList<T>) => IList<T>;
+type sortFunc = <T>(
+  list: IList<T>,
+  compare?: (first: T, second: T) => number
+) => IList<T>;
 
 describe(
   'sorting',
