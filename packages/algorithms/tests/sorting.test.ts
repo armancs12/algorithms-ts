@@ -1,9 +1,12 @@
 import { ArrayList, IList, LinkedList } from 'data-structures';
-import { bubbleSort, selectionSort } from '../src';
+import { bubbleSort, insertionSort, selectionSort, quickSort } from '../src';
 
 type sortFunc = <T>(list: IList<T>) => IList<T>;
 
-describe('sorting', sortingTest([bubbleSort, selectionSort]));
+describe(
+  'sorting',
+  sortingTest([bubbleSort, selectionSort, insertionSort, quickSort])
+);
 
 function sortingTest(funcs: sortFunc[]) {
   return () => {
