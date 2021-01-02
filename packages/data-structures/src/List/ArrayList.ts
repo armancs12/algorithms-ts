@@ -1,6 +1,6 @@
 import IList from './IList';
 import DynamicArray from '../common/DynamicArray';
-import { IndexOutOfRangeError, NoItemError } from '../exceptions';
+import { IndexOutOfRangeError, EmptyStructureError } from '../exceptions';
 export default class ArrayList<T> implements IList<T> {
   private array: DynamicArray<T>;
 
@@ -21,12 +21,12 @@ export default class ArrayList<T> implements IList<T> {
   }
 
   pop(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.removeAt(this.length - 1);
   }
 
   popFront(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.removeAt(0);
   }
 

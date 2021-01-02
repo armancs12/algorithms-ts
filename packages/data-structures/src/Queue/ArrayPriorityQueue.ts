@@ -1,5 +1,5 @@
 import DynamicArray from '../common/DynamicArray';
-import { NoItemError } from '../exceptions';
+import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
 
 export default class ArrayPriorityQueue<T> implements IQueue<T> {
@@ -32,17 +32,17 @@ export default class ArrayPriorityQueue<T> implements IQueue<T> {
   }
 
   dequeue(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.array.removeAt(0);
   }
 
   front(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.array.get(0);
   }
 
   rear(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.array.get(this.length - 1);
   }
 

@@ -1,4 +1,4 @@
-import { NoItemError } from '../exceptions';
+import { EmptyStructureError } from '../exceptions';
 import StaticArray from './StaticArray';
 
 export default class BinaryHeap<T> {
@@ -29,7 +29,7 @@ export default class BinaryHeap<T> {
   }
 
   pop(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     const data = this.array.get(0);
     this.array.set(0, this.array.get(this.length - 1));
     this.array.set(--this._length, undefined);
@@ -40,7 +40,7 @@ export default class BinaryHeap<T> {
   }
 
   peek(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.array.get(0);
   }
 

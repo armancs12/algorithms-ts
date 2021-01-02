@@ -1,6 +1,6 @@
 import IStack from './IStack';
 import DynamicArray from '../common/DynamicArray';
-import { NoItemError } from '../exceptions';
+import { EmptyStructureError } from '../exceptions';
 
 export default class ArrayStack<T> implements IStack<T> {
   private array: DynamicArray<T>;
@@ -18,12 +18,12 @@ export default class ArrayStack<T> implements IStack<T> {
   }
 
   pop(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.array.removeAt(this.length - 1);
   }
 
   peek(): T {
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     return this.array.get(this.length - 1);
   }
 

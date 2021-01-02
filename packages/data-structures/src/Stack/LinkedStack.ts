@@ -1,6 +1,6 @@
 import IStack from './IStack';
 import Node from '../common/Node';
-import { NoItemError } from '../exceptions';
+import { EmptyStructureError } from '../exceptions';
 
 export default class LinkedStack<T> implements IStack<T> {
   private len: number;
@@ -21,7 +21,7 @@ export default class LinkedStack<T> implements IStack<T> {
   }
 
   pop(): T {
-    if (this.len == 0) throw new NoItemError();
+    if (this.len == 0) throw new EmptyStructureError();
     if (this.len == 1) {
       const data = this.head.data;
       this.head = null;
@@ -36,7 +36,7 @@ export default class LinkedStack<T> implements IStack<T> {
   }
 
   peek(): T {
-    if (this.len == 0) throw new NoItemError();
+    if (this.len == 0) throw new EmptyStructureError();
     return this.head.getLast().data;
   }
 

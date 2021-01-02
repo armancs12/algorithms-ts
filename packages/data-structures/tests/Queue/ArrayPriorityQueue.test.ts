@@ -1,6 +1,6 @@
 import IQueue from '../../src/Queue/IQueue';
 import { ArrayPriorityQueue } from '../../src';
-import { NoItemError } from '../../src/exceptions';
+import { EmptyStructureError } from '../../src/exceptions';
 
 describe('ArrayPriorityQueue', () => {
   let queue: IQueue<number>;
@@ -45,10 +45,10 @@ describe('ArrayPriorityQueue', () => {
   });
 
   describe('dequeue', () => {
-    it('should throw an NoItemError when called right after initialization', () => {
+    it('should throw an EmptyStructureError when called right after initialization', () => {
       expect(() => {
         queue.dequeue();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should decrease length by 1', () => {
@@ -75,7 +75,7 @@ describe('ArrayPriorityQueue', () => {
       expect(returned).toEqual('[ 12 ]');
     });
 
-    it('should throw an NoItemError when queue is empty', () => {
+    it('should throw an EmptyStructureError when queue is empty', () => {
       queue.enqueue(12);
       queue.enqueue(24);
       queue.dequeue();
@@ -83,15 +83,15 @@ describe('ArrayPriorityQueue', () => {
 
       expect(() => {
         queue.dequeue();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
   describe('front', () => {
-    it('should throw an NoItemError when called right after initialization', () => {
+    it('should throw an EmptyStructureError when called right after initialization', () => {
       expect(() => {
         queue.front();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return the front which is data of top priority (1)', () => {
@@ -113,7 +113,7 @@ describe('ArrayPriorityQueue', () => {
       expect(returned).toEqual(48);
     });
 
-    it('should throw an NoItemError when queue is empty', () => {
+    it('should throw an EmptyStructureError when queue is empty', () => {
       queue.enqueue(12);
       queue.enqueue(24);
       queue.dequeue();
@@ -121,15 +121,15 @@ describe('ArrayPriorityQueue', () => {
 
       expect(() => {
         queue.front();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
   describe('rear', () => {
-    it('should throw an NoItemError when called right after initialization', () => {
+    it('should throw an EmptyStructureError when called right after initialization', () => {
       expect(() => {
         queue.rear();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return the rear which is data of lowest priority (1)', () => {
@@ -151,7 +151,7 @@ describe('ArrayPriorityQueue', () => {
       expect(returned).toEqual(-12);
     });
 
-    it('should throw an NoItemError when queue is empty', () => {
+    it('should throw an EmptyStructureError when queue is empty', () => {
       queue.enqueue(12);
       queue.enqueue(24);
       queue.dequeue();
@@ -159,7 +159,7 @@ describe('ArrayPriorityQueue', () => {
 
       expect(() => {
         queue.rear();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 

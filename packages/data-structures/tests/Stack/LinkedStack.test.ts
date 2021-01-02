@@ -1,5 +1,5 @@
 import { LinkedStack } from '../../src';
-import { NoItemError } from '../../src/exceptions';
+import { EmptyStructureError } from '../../src/exceptions';
 
 describe('LinkedStack', () => {
   describe('length', () => {
@@ -43,7 +43,7 @@ describe('LinkedStack', () => {
 
       expect(() => {
         linkedStack.pop();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should remove from stack', () => {
@@ -76,7 +76,7 @@ describe('LinkedStack', () => {
 
       expect(() => {
         linkedStack.pop();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
@@ -86,7 +86,7 @@ describe('LinkedStack', () => {
 
       expect(() => {
         linkedStack.peek();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return last pushed item', () => {
@@ -109,7 +109,7 @@ describe('LinkedStack', () => {
 
       expect(() => {
         linkedStack.peek();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 

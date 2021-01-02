@@ -1,5 +1,8 @@
 import { ArrayList } from '../../src';
-import { NoItemError, IndexOutOfRangeError } from '../../src/exceptions';
+import {
+  EmptyStructureError,
+  IndexOutOfRangeError,
+} from '../../src/exceptions';
 
 describe('ArrayList', () => {
   describe('length', () => {
@@ -63,7 +66,7 @@ describe('ArrayList', () => {
 
       expect(() => {
         arrayList.pop();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return last pushed item', () => {
@@ -83,7 +86,7 @@ describe('ArrayList', () => {
 
       expect(() => {
         arrayList.pop();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
@@ -93,7 +96,7 @@ describe('ArrayList', () => {
 
       expect(() => {
         arrayList.popFront();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return first pushed item', () => {
@@ -113,7 +116,7 @@ describe('ArrayList', () => {
 
       expect(() => {
         arrayList.popFront();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 

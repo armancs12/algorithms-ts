@@ -1,6 +1,6 @@
 import IList from './IList';
 import Node from '../common/Node';
-import { IndexOutOfRangeError, NoItemError } from '../exceptions';
+import { IndexOutOfRangeError, EmptyStructureError } from '../exceptions';
 export default class LinkedList<T> implements IList<T> {
   private head: Node<T>;
   private len: number;
@@ -27,7 +27,7 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   pop(): T {
-    if (this.len == 0) throw new NoItemError();
+    if (this.len == 0) throw new EmptyStructureError();
     if (this.len == 1) {
       const data = this.head.data;
       this.head = null;
@@ -42,7 +42,7 @@ export default class LinkedList<T> implements IList<T> {
   }
 
   popFront(): T {
-    if (this.len == 0) throw new NoItemError();
+    if (this.len == 0) throw new EmptyStructureError();
 
     const data = this.head.data;
     this.head = this.head.next;

@@ -1,5 +1,5 @@
 import Node from '../common/Node';
-import { NoItemError } from '../exceptions';
+import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
 
 export default class LinkedQueue<T> implements IQueue<T> {
@@ -21,7 +21,7 @@ export default class LinkedQueue<T> implements IQueue<T> {
   }
 
   dequeue(): T {
-    if (this.len == 0) throw new NoItemError();
+    if (this.len == 0) throw new EmptyStructureError();
     const data = this.head.data;
     this.head = this.head.next;
     this.len--;
@@ -29,12 +29,12 @@ export default class LinkedQueue<T> implements IQueue<T> {
   }
 
   front(): T {
-    if (this.len == 0) throw new NoItemError();
+    if (this.len == 0) throw new EmptyStructureError();
     return this.head.data;
   }
 
   rear(): T {
-    if (this.len == 0) throw new NoItemError();
+    if (this.len == 0) throw new EmptyStructureError();
     return this.head.getLast().data;
   }
 

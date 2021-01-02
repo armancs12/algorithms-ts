@@ -1,5 +1,5 @@
 import BinaryHeap from '../common/BinaryHeap';
-import { NoItemError } from '../exceptions';
+import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
 
 export default class HeapPriorityQueue<T> implements IQueue<T> {
@@ -27,7 +27,7 @@ export default class HeapPriorityQueue<T> implements IQueue<T> {
 
   rear(): T {
     //TODO: find a better solution
-    if (this.length == 0) throw new NoItemError();
+    if (this.length == 0) throw new EmptyStructureError();
     const newHeap = new BinaryHeap<T>();
     let data: T;
     while (this.length != 0) {

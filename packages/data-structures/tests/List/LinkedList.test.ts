@@ -1,5 +1,8 @@
 import { LinkedList } from '../../src';
-import { IndexOutOfRangeError, NoItemError } from '../../src/exceptions';
+import {
+  IndexOutOfRangeError,
+  EmptyStructureError,
+} from '../../src/exceptions';
 
 describe('LinkedList', () => {
   describe('length', () => {
@@ -63,7 +66,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.pop();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return last pushed item', () => {
@@ -83,7 +86,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.pop();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
@@ -93,7 +96,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.popFront();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return first pushed item', () => {
@@ -113,7 +116,7 @@ describe('LinkedList', () => {
 
       expect(() => {
         linkedList.popFront();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 

@@ -1,6 +1,6 @@
 import IQueue from '../../src/Queue/IQueue';
 import { LinkedQueue } from '../../src';
-import { NoItemError } from '../../src/exceptions';
+import { EmptyStructureError } from '../../src/exceptions';
 
 describe('LinkedQueue', () => {
   let queue: IQueue<number>;
@@ -31,10 +31,10 @@ describe('LinkedQueue', () => {
   });
 
   describe('dequeue', () => {
-    it('should throw an NoItemError when called right after initialization', () => {
+    it('should throw an EmptyStructureError when called right after initialization', () => {
       expect(() => {
         queue.dequeue();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should decrease length by 1', () => {
@@ -61,7 +61,7 @@ describe('LinkedQueue', () => {
       expect(returned).toEqual('[ 24 ]');
     });
 
-    it('should throw an NoItemError when queue is empty', () => {
+    it('should throw an EmptyStructureError when queue is empty', () => {
       queue.enqueue(12);
       queue.enqueue(24);
       queue.dequeue();
@@ -69,15 +69,15 @@ describe('LinkedQueue', () => {
 
       expect(() => {
         queue.dequeue();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
   describe('front', () => {
-    it('should throw an NoItemError when called right after initialization', () => {
+    it('should throw an EmptyStructureError when called right after initialization', () => {
       expect(() => {
         queue.front();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return the front of the queue', () => {
@@ -88,7 +88,7 @@ describe('LinkedQueue', () => {
       expect(returned).toEqual(12);
     });
 
-    it('should throw an NoItemError when queue is empty', () => {
+    it('should throw an EmptyStructureError when queue is empty', () => {
       queue.enqueue(12);
       queue.enqueue(24);
       queue.dequeue();
@@ -96,15 +96,15 @@ describe('LinkedQueue', () => {
 
       expect(() => {
         queue.front();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
   describe('rear', () => {
-    it('should throw an NoItemError when called right after initialization', () => {
+    it('should throw an EmptyStructureError when called right after initialization', () => {
       expect(() => {
         queue.rear();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
 
     it('should return the rear of the queue', () => {
@@ -115,7 +115,7 @@ describe('LinkedQueue', () => {
       expect(returned).toEqual(24);
     });
 
-    it('should throw an NoItemError when queue is empty', () => {
+    it('should throw an EmptyStructureError when queue is empty', () => {
       queue.enqueue(12);
       queue.enqueue(24);
       queue.dequeue();
@@ -123,7 +123,7 @@ describe('LinkedQueue', () => {
 
       expect(() => {
         queue.rear();
-      }).toThrowError(NoItemError);
+      }).toThrowError(EmptyStructureError);
     });
   });
 
