@@ -9,3 +9,5 @@ export { default as LinkedQueue } from './Queue/LinkedQueue';
 export { default as ArrayQueue } from './Queue/ArrayQueue';
 export { default as ArrayPriorityQueue } from './Queue/ArrayPriorityQueue';
 export { default as HeapPriorityQueue } from './Queue/HeapPriorityQueue';
+export { default as IBinarySearchTree } from './Tree/IBinarySearchTree';
+export { default as BinarySearchTree } from './Tree/BinarySearchTree';
