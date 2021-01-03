@@ -5,7 +5,7 @@ import IQueue from './IQueue';
 export default class HeapPriorityQueue<T> implements IQueue<T> {
   heap: BinaryHeap<T>;
 
-  constructor(compareFunction?: (first: T, second: T) => 1 | 0 | -1) {
+  constructor(compareFunction?: (first: T, second: T) => number) {
     this.heap = new BinaryHeap(compareFunction);
   }
 

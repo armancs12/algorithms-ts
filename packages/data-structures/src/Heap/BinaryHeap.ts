@@ -4,7 +4,7 @@ import IHeap from './IHeap';
 
 export default class BinaryHeap<T> implements IHeap<T> {
   private array: StaticArray<T>;
-  private compare = (first: T, second: T): 1 | 0 | -1 => {
+  private compare = (first: T, second: T): number => {
     if (first > second) return 1;
     else if (first < second) return -1;
     else return 0;
@@ -13,7 +13,7 @@ export default class BinaryHeap<T> implements IHeap<T> {
   private _length = 0;
   private increaseCount = 0;
 
-  constructor(compareFunction?: (first: T, second: T) => 1 | 0 | -1) {
+  constructor(compareFunction?: (first: T, second: T) => number) {
     this.compare = compareFunction ?? this.compare;
     this.array = new StaticArray(1);
   }

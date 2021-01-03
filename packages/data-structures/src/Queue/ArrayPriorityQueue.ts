@@ -4,9 +4,9 @@ import IQueue from './IQueue';
 
 export default class ArrayPriorityQueue<T> implements IQueue<T> {
   private array: DynamicArray<T>;
-  private compare: (first: T, second: T) => 1 | 0 | -1;
+  private compare: (first: T, second: T) => number;
 
-  constructor(compareFunction?: (first: T, second: T) => 1 | 0 | -1) {
+  constructor(compareFunction?: (first: T, second: T) => number) {
     this.array = new DynamicArray();
     this.compare =
       compareFunction ??
