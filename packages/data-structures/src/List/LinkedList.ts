@@ -36,7 +36,7 @@ export default class LinkedList<T> implements IList<T> {
     }
     const last = this.head.getLastBefore();
     const data = last.next.data;
-    last.next.data = null;
+    last.next = null;
     this.len--;
     return data;
   }
