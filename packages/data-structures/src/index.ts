@@ -11,3 +11,5 @@ export { default as ArrayPriorityQueue } from './Queue/ArrayPriorityQueue';
 export { default as HeapPriorityQueue } from './Queue/HeapPriorityQueue';
 export { default as IBinarySearchTree } from './Tree/IBinarySearchTree';
 export { default as BinarySearchTree } from './Tree/BinarySearchTree';
+export { default as IHeap } from './Heap/IHeap';
+export { default as BinaryHeap } from './Heap/BinaryHeap';

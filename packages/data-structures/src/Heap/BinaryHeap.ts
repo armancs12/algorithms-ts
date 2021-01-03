@@ -1,7 +1,8 @@
 import { EmptyStructureError } from '../exceptions';
-import StaticArray from './StaticArray';
+import StaticArray from '../common/StaticArray';
+import IHeap from './IHeap';
 
-export default class BinaryHeap<T> {
+export default class BinaryHeap<T> implements IHeap<T> {
   private array: StaticArray<T>;
   private compare = (first: T, second: T): 1 | 0 | -1 => {
     if (first > second) return 1;

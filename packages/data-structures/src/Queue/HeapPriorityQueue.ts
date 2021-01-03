@@ -1,4 +1,4 @@
-import BinaryHeap from '../common/BinaryHeap';
+import BinaryHeap from '../Heap/BinaryHeap';
 import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
 
