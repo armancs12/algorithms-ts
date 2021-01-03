@@ -60,7 +60,7 @@ export default class DynamicArray<T> {
   }
 
   decreaseSize(): StaticArray<T> {
-    return this.changeSize(this.len / 2);
+    return this.changeSize(this.array.size() / 2);
   }
 
   toString(): string {
