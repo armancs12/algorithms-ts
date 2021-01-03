@@ -2,9 +2,9 @@ import { EmptyStructureError } from '../exceptions';
 import StaticArray from '../common/StaticArray';
 import IHeap from './IHeap';
 
-export default class BinaryHeap<T> implements IHeap<T> {
-  private array: StaticArray<T>;
-  private compare = (first: T, second: T): number => {
+export default abstract class BinaryHeap<T> implements IHeap<T> {
+  protected array: StaticArray<T>;
+  protected compare = (first: T, second: T): number => {
     if (first > second) return 1;
     else if (first < second) return -1;
     else return 0;
@@ -17,6 +17,8 @@ export default class BinaryHeap<T> implements IHeap<T> {
     this.compare = compareFunction ?? this.compare;
     this.array = new StaticArray(1);
   }
+
+  protected abstract hasHigherPriority(first: number, second: number): boolean;
 
   get length(): number {
     return this._length;
@@ -45,10 +47,11 @@ export default class BinaryHeap<T> implements IHeap<T> {
     return this.array.get(0);
   }
 
+
   private shiftUp(): void {
     let index = this.length - 1;
     while (this.hasParent(index)) {
-      if (this.isGreaterThan(index, this.parent(index))) {
+      if (this.hasHigherPriority(index, this.parent(index))) {
         this.swap(index, this.parent(index));
         index = this.parent(index);
       } else return;
@@ -58,8 +61,8 @@ export default class BinaryHeap<T> implements IHeap<T> {
   private shiftDown(): void {
     let index = 0;
     while (this.hasLeftChild(index)) {
-      const child = this.getGreatestChild(index);
-      if (this.isGreaterThan(index, child)) return;
+      const child = this.getHigherPriorityChild(index);
+      if (this.hasHigherPriority(index, child)) return;
       else {
         this.swap(index, child);
         index = child;
@@ -73,14 +76,10 @@ export default class BinaryHeap<T> implements IHeap<T> {
     this.array.set(second, temp);
   }
 
-  private isGreaterThan(first: number, second: number) {
-    return this.compare(this.array.get(first), this.array.get(second)) > 0;
-  }
-
-  private getGreatestChild(index: number): number {
+  private getHigherPriorityChild(index: number): number {
     if (
       this.hasRightChild(index) &&
-      this.isGreaterThan(this.rightChild(index), this.leftChild(index))
+      this.hasHigherPriority(this.rightChild(index), this.leftChild(index))
     ) {
       return this.rightChild(index);
     } else return this.leftChild(index);

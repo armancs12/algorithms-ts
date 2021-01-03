@@ -1,12 +1,12 @@
-import BinaryHeap from '../Heap/BinaryHeap';
+import MaxBinaryHeap from '../Heap/MaxBinaryHeap';
 import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
 
 export default class HeapPriorityQueue<T> implements IQueue<T> {
-  heap: BinaryHeap<T>;
+  heap: MaxBinaryHeap<T>;
 
   constructor(compareFunction?: (first: T, second: T) => number) {
-    this.heap = new BinaryHeap(compareFunction);
+    this.heap = new MaxBinaryHeap(compareFunction);
   }
 
   get length(): number {
@@ -28,7 +28,7 @@ export default class HeapPriorityQueue<T> implements IQueue<T> {
   rear(): T {
     //TODO: find a better solution
     if (this.length == 0) throw new EmptyStructureError();
-    const newHeap = new BinaryHeap<T>();
+    const newHeap = new MaxBinaryHeap<T>();
     let data: T;
     while (this.length != 0) {
       data = this.heap.pop();
@@ -40,7 +40,7 @@ export default class HeapPriorityQueue<T> implements IQueue<T> {
 
   toString(): string {
     //TODO: find a better solution
-    const newHeap = new BinaryHeap<T>();
+    const newHeap = new MaxBinaryHeap<T>();
     let data: T;
     let print = '[ ';
     while (this.length != 0) {

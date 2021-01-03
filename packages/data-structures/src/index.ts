@@ -12,4 +12,5 @@ export { default as HeapPriorityQueue } from './Queue/HeapPriorityQueue';
 export { default as IBinarySearchTree } from './Tree/IBinarySearchTree';
 export { default as BinarySearchTree } from './Tree/BinarySearchTree';
 export { default as IHeap } from './Heap/IHeap';
-export { default as BinaryHeap } from './Heap/BinaryHeap';
+export { default as MaxBinaryHeap } from './Heap/MaxBinaryHeap';
+export { default as MinBinaryHeap } from './Heap/MinBinaryHeap';
