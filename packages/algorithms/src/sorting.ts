@@ -1,8 +1,8 @@
-import { IList } from 'data-structures';
+import { ArrayList, IList, MinBinaryHeap } from 'data-structures';
 
 type sortFunc = <T>(
   list: IList<T>,
-  compare?: (first: T, second: T) => number
+  compare?: <T>(first: T, second: T) => number
 ) => IList<T>;
 
 function compareDefaultFunc<T>(first: T, second: T): number {
@@ -87,5 +87,65 @@ export const quickSort: sortFunc = (list, compare = compareDefaultFunc) => {
   }
 
   sort(0, list.length - 1);
+  return list;
+};
+
+export const mergeSort: sortFunc = (list, compare = compareDefaultFunc) => {
+  function merge<T>(left: IList<T>, right: IList<T>): IList<T> {
+    const length = left.length + right.length;
+    const list = new ArrayList<T>();
+
+    let leftIndex = 0;
+    let rightIndex = 0;
+
+    for (let i = 0; i < length; i++) {
+      if (left.length == leftIndex) {
+        list.push(right.get(rightIndex++));
+      } else if (right.length == rightIndex) {
+        list.push(left.get(leftIndex++));
+      } else {
+        const leftData = left.get(leftIndex);
+        const rightData = right.get(rightIndex);
+        if (compare(leftData, rightData) < 0) {
+          list.push(leftData);
+          leftIndex++;
+        } else {
+          list.push(rightData);
+          rightIndex++;
+        }
+      }
+    }
+
+    return list;
+  }
+
+  function sort<T>(list: IList<T>): IList<T> {
+    if (list.length <= 1) return list;
+
+    const middle = Math.floor(list.length / 2);
+
+    let left: IList<T> = new ArrayList();
+    for (let i = 0; i < middle; i++) left.push(list.get(i));
+    left = sort(left);
+
+    let right: IList<T> = new ArrayList();
+    for (let i = middle; i < list.length; i++) right.push(list.get(i));
+    right = sort(right);
+
+    return merge(left, right);
+  }
+
+  const sorted = sort(list);
+  for (let i = 0; i < list.length; i++) list.set(i, sorted.get(i));
+  return list;
+};
+
+export const heapSort: sortFunc = <T>(
+  list: IList<T>,
+  compare = compareDefaultFunc
+) => {
+  const heap = new MinBinaryHeap<T>(compare);
+  while (list.length != 0) heap.push(list.pop());
+  while (heap.length != 0) list.push(heap.pop());
   return list;
 };

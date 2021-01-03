@@ -1,14 +1,28 @@
 import { ArrayList, IList, LinkedList } from 'data-structures';
-import { bubbleSort, insertionSort, selectionSort, quickSort } from '../src';
+import {
+  bubbleSort,
+  insertionSort,
+  selectionSort,
+  quickSort,
+  mergeSort,
+  heapSort,
+} from '../src';
 
 type sortFunc = <T>(
   list: IList<T>,
-  compare?: (first: T, second: T) => number
+  compare?: <T>(first: T, second: T) => number
 ) => IList<T>;
 
 describe(
   'sorting',
-  sortingTest([bubbleSort, selectionSort, insertionSort, quickSort])
+  sortingTest([
+    bubbleSort,
+    selectionSort,
+    insertionSort,
+    quickSort,
+    mergeSort,
+    heapSort,
+  ])
 );
 
 function sortingTest(funcs: sortFunc[]) {
