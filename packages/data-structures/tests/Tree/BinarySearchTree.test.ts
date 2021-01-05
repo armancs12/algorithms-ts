@@ -88,6 +88,74 @@ describe('BinarySearchTree', () => {
         tree.remove(24);
       }).toThrowError(NonExistingDataError);
     });
+
+    it('should remove one of duplicate data (1)', () => {
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(-12);
+      tree.insert(-12);
+      tree.insert(25);
+      tree.insert(24);
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(24);
+      tree.insert(36);
+
+      tree.remove(24);
+      const string = tree.toString();
+      expect(string).toEqual('[ -12 -12 24 25 36 36 36 48 48 ]');
+    });
+
+    it('should remove one of duplicate data (2)', () => {
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(-12);
+      tree.insert(-12);
+      tree.insert(25);
+      tree.insert(24);
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(24);
+      tree.insert(36);
+
+      tree.remove(-12);
+      const string = tree.toString();
+      expect(string).toEqual('[ -12 24 24 25 36 36 36 48 48 ]');
+    });
+
+    it('should remove one of duplicate data (3)', () => {
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(-12);
+      tree.insert(-12);
+      tree.insert(25);
+      tree.insert(24);
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(24);
+      tree.insert(36);
+
+      tree.remove(48);
+      const string = tree.toString();
+      expect(string).toEqual('[ -12 -12 24 24 25 36 36 36 48 ]');
+    });
+
+    it('should remove one of duplicate data (4)', () => {
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(-12);
+      tree.insert(-12);
+      tree.insert(25);
+      tree.insert(24);
+      tree.insert(36);
+      tree.insert(48);
+      tree.insert(24);
+      tree.insert(36);
+
+      tree.remove(36);
+      const string = tree.toString();
+      expect(string).toEqual('[ -12 -12 24 24 25 36 36 48 48 ]');
+    });
   });
 
   describe('inOrderIter', () => {

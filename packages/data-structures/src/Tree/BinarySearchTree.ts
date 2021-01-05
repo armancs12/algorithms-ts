@@ -48,9 +48,9 @@ export default class BinarySearchTree<T>
   private insertTo(data: T, node: BinaryNode<T>): BinaryNode<T> {
     if (node == null) return new BinaryNode(data);
     else {
-      if (this.compare(data, node.data) > 0)
-        node.right = this.insertTo(data, node.right);
-      else node.left = this.insertTo(data, node.left);
+      if (this.compare(data, node.data) < 0)
+        node.left = this.insertTo(data, node.left);
+      else node.right = this.insertTo(data, node.right);
       return node;
     }
   }
