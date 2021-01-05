@@ -1,20 +1,18 @@
+import {
+  compareFunction,
+  defaultCompareFunction,
+} from '../common/compareFunction';
 import DynamicArray from '../common/DynamicArray';
 import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
 
 export default class ArrayPriorityQueue<T> implements IQueue<T> {
   private array: DynamicArray<T>;
-  private compare: (first: T, second: T) => number;
+  private compare: compareFunction<T>;
 
-  constructor(compareFunction?: (first: T, second: T) => number) {
+  constructor(compareFunction?: compareFunction<T>) {
     this.array = new DynamicArray();
-    this.compare =
-      compareFunction ??
-      ((first, second) => {
-        if (first > second) return 1;
-        else if (first < second) return -1;
-        else return 0;
-      });
+    this.compare = compareFunction ?? defaultCompareFunction<T>();
   }
 
   get length(): number {

@@ -1,11 +1,12 @@
 import MaxBinaryHeap from '../Heap/MaxBinaryHeap';
 import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
+import { compareFunction } from '../common/compareFunction';
 
 export default class HeapPriorityQueue<T> implements IQueue<T> {
   heap: MaxBinaryHeap<T>;
 
-  constructor(compareFunction?: (first: T, second: T) => number) {
+  constructor(compareFunction?: compareFunction<T>) {
     this.heap = new MaxBinaryHeap(compareFunction);
   }
 

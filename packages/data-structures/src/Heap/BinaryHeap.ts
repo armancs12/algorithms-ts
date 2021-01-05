@@ -1,20 +1,20 @@
 import { EmptyStructureError } from '../exceptions';
 import StaticArray from '../common/StaticArray';
 import IHeap from './IHeap';
+import {
+  compareFunction,
+  defaultCompareFunction,
+} from '../common/compareFunction';
 
 export default abstract class BinaryHeap<T> implements IHeap<T> {
   protected array: StaticArray<T>;
-  protected compare = (first: T, second: T): number => {
-    if (first > second) return 1;
-    else if (first < second) return -1;
-    else return 0;
-  };
+  protected compare: compareFunction<T>;
 
   private _length = 0;
   private increaseCount = 0;
 
-  constructor(compareFunction?: (first: T, second: T) => number) {
-    this.compare = compareFunction ?? this.compare;
+  constructor(compareFunction?: compareFunction<T>) {
+    this.compare = compareFunction ?? defaultCompareFunction<T>();
     this.array = new StaticArray(1);
   }
 
@@ -46,7 +46,6 @@ export default abstract class BinaryHeap<T> implements IHeap<T> {
     if (this.length == 0) throw new EmptyStructureError();
     return this.array.get(0);
   }
-
 
   private shiftUp(): void {
     let index = this.length - 1;
