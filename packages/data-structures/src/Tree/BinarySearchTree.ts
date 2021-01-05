@@ -2,20 +2,23 @@ import IBinarySearchTree from './IBinarySearchTree';
 import BinaryTree from './BinaryTree';
 import BinaryNode from '../common/BinaryNode';
 import { EmptyStructureError, NonExistingDataError } from '../exceptions';
+import {
+  compareFunction,
+  defaultCompareFunction,
+} from '../common/compareFunction';
 
 export default class BinarySearchTree<T>
   extends BinaryTree<T>
   implements IBinarySearchTree<T> {
+  protected compare: compareFunction<T>;
+
+  constructor(compareFunction?: compareFunction<T>) {
+    super();
+    this.compare = compareFunction ?? defaultCompareFunction<T>();
+  }
+
   insert(data: T): void {
-    function insert(data: T, node: BinaryNode<T>) {
-      if (node == null) return new BinaryNode(data);
-      else {
-        if (data > node.data) node.right = insert(data, node.right);
-        else node.left = insert(data, node.left);
-        return node;
-      }
-    }
-    this.root = insert(data, this.root);
+    this.root = this.insertTo(data, this.root);
     this._length++;
   }
 
@@ -42,20 +45,32 @@ export default class BinarySearchTree<T>
     return iter;
   }
 
-  private removeFrom(data: T, node: BinaryNode<T>): BinaryNode<T> {
-      if (node == null) throw new NonExistingDataError();
-      if (data > node.data) node.right = this.removeFrom(data, node.right);
-      else if (data < node.data) node.left = this.removeFrom(data, node.left);
-      else {
-        if (node.right == null) return node.left;
-        if (node.left == null) return node.right;
-        else {
-          const next = this.getNextInOrder(node);
-          node.data = next.data;
-          node.right = this.removeFrom(data, node.right);
-          return node;
-        }
-      }
+  private insertTo(data: T, node: BinaryNode<T>): BinaryNode<T> {
+    if (node == null) return new BinaryNode(data);
+    else {
+      if (this.compare(data, node.data) > 0)
+        node.right = this.insertTo(data, node.right);
+      else node.left = this.insertTo(data, node.left);
       return node;
     }
+  }
+
+  private removeFrom(data: T, node: BinaryNode<T>): BinaryNode<T> {
+    if (node == null) throw new NonExistingDataError();
+    if (this.compare(data, node.data) > 0)
+      node.right = this.removeFrom(data, node.right);
+    else if (this.compare(data, node.data) < 0)
+      node.left = this.removeFrom(data, node.left);
+    else {
+      if (node.right == null) return node.left;
+      if (node.left == null) return node.right;
+      else {
+        const next = this.getNextInOrder(node);
+        node.data = next.data;
+        node.right = this.removeFrom(data, node.right);
+        return node;
+      }
+    }
+    return node;
+  }
 }
