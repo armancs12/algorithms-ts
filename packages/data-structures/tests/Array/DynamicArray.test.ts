@@ -1,4 +1,4 @@
-import DynamicArray from '../../src/common/DynamicArray';
+import { DynamicArray } from '../../src';
 import { IndexOutOfRangeError } from '../../src/exceptions';
 
 describe('DynamicArray', () => {

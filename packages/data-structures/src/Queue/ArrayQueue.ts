@@ -1,4 +1,4 @@
-import DynamicArray from '../common/DynamicArray';
+import DynamicArray from '../Array/DynamicArray';
 import { EmptyStructureError } from '../exceptions';
 import IQueue from './IQueue';
 

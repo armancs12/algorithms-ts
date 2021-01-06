@@ -1,5 +1,5 @@
 import { EmptyStructureError } from '../exceptions';
-import StaticArray from '../common/StaticArray';
+import StaticArray from '../Array/StaticArray';
 import IHeap from './IHeap';
 import {
   compareFunction,

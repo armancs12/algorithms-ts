@@ -1,5 +1,5 @@
 import IStack from './IStack';
-import DynamicArray from '../common/DynamicArray';
+import DynamicArray from '../Array/DynamicArray';
 import { EmptyStructureError } from '../exceptions';
 
 export default class ArrayStack<T> implements IStack<T> {

@@ -1,3 +1,5 @@
+export { default as StaticArray } from './Array/StaticArray';
+export { default as DynamicArray } from './Array/DynamicArray';
 export { default as IList } from './List/IList';
 export { default as LinkedList } from './List/LinkedList';
 export { default as ArrayList } from './List/ArrayList';

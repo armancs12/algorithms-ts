@@ -1,5 +1,5 @@
 import IList from './IList';
-import DynamicArray from '../common/DynamicArray';
+import DynamicArray from '../Array/DynamicArray';
 import { IndexOutOfRangeError, EmptyStructureError } from '../exceptions';
 export default class ArrayList<T> implements IList<T> {
   private array: DynamicArray<T>;
