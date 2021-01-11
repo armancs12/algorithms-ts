@@ -36,7 +36,7 @@ export default class BinarySearchTree<T>
     return contains;
   }
 
-  private getNextInOrder(node: BinaryNode<T>): BinaryNode<T> {
+  protected getNextInOrder(node: BinaryNode<T>): BinaryNode<T> {
     if (node == null) throw new NonExistingDataError();
     let iter = node.right;
     while (iter.left != null) {
